@@ -50,7 +50,7 @@ func (bc *BitClient) DisableHook(projectKey, repositorySlug, hookKey string) err
 }
 
 // GetYACCHookSettings return the YACC hook settings from bitbucket
-func (bc *BitClient) GetYACCHookSettings(projectKey string , repositorySlug string) (YaccHookSettings, error) {
+func (bc *BitClient) GetYACCHookSettings(projectKey string, repositorySlug string) (YaccHookSettings, error) {
 	response := YaccHookSettings{}
 
 	_, err := bc.DoGet(

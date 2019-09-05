@@ -8,6 +8,23 @@ type GetProjectsResponse struct {
 	PagedResponse
 	Values []Project
 }
+type CreateProjectRequest struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Key         string `json:"key"`
+}
+
+func (bc *BitClient) CreateProjects(params CreateProjectRequest) (Project, error) {
+	response := Project{}
+
+	_, err := bc.DoPost(
+		fmt.Sprintf("/projects/"),
+		params,
+		&response,
+	)
+
+	return response, err
+}
 
 func (bc *BitClient) GetProjects(params PagedRequest) (GetProjectsResponse, error) {
 
