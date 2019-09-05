@@ -14,7 +14,7 @@ type CreateProjectRequest struct {
 	Key         string `json:"key"`
 }
 
-func (bc *BitClient) CreateProjects(params CreateProjectRequest) (Project, error) {
+func (bc *BitClient) CreateProject(params CreateProjectRequest) (Project, error) {
 	response := Project{}
 
 	_, err := bc.DoPost(
@@ -24,6 +24,17 @@ func (bc *BitClient) CreateProjects(params CreateProjectRequest) (Project, error
 	)
 
 	return response, err
+}
+
+func (bc *BitClient) DeleteProject(projectKey string) error {
+
+	_, err := bc.DoDeleteUrl(
+		fmt.Sprintf("/projects/%s/", projectKey),
+		nil,
+		nil,
+	)
+
+	return err
 }
 
 func (bc *BitClient) GetProjects(params PagedRequest) (GetProjectsResponse, error) {
