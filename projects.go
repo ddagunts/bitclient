@@ -14,6 +14,16 @@ type CreateProjectRequest struct {
 	Key         string `json:"key"`
 }
 
+type SSHKey struct {
+	Text  string `json:"text"`
+	Label string `json:"label"`
+}
+
+type AddSSHKeyRequest struct {
+	Key        SSHKey
+	Permission string `json:"permission"`
+}
+
 func (bc *BitClient) CreateProject(params CreateProjectRequest) (Project, error) {
 	response := Project{}
 
@@ -34,6 +44,16 @@ func (bc *BitClient) DeleteProject(projectKey string) error {
 		nil,
 	)
 
+	return err
+}
+
+func (bc *BitClient) AddSSHKeyToProject(projectKey string, params AddSSHKeyRequest) error {
+	keysBaseUri := "/rest/keys/1.0"
+	uri := fmt.Sprintf("/projects/%s/ssh", projectKey)
+	rError := new(ErrorResponse)
+
+	resp, _ := bc.sling.New().Post(keysBaseUri+uri).BodyJSON(params).Receive(nil, rError)
+	_, err := bc.checkReponse(resp, rError)
 	return err
 }
 
