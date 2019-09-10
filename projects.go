@@ -20,7 +20,7 @@ type SSHKey struct {
 }
 
 type AddSSHKeyRequest struct {
-	Key        SSHKey
+	Key        SSHKey `json:"key"`
 	Permission string `json:"permission"`
 }
 
