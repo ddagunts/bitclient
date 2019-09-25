@@ -39,7 +39,7 @@ func (bc *BitClient) CreateProject(params CreateProjectRequest) (Project, error)
 func (bc *BitClient) GetProject(projectKey string) (Project, error) {
 	response := Project{}
 
-	_, err := bc.DoPost(
+	_, err := bc.DoGet(
 		fmt.Sprintf("/projects/%s/", projectKey),
 		nil,
 		&response,
