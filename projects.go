@@ -36,6 +36,18 @@ func (bc *BitClient) CreateProject(params CreateProjectRequest) (Project, error)
 	return response, err
 }
 
+func (bc *BitClient) GetProject(projectKey string) (Project, error) {
+	response := Project{}
+
+	_, err := bc.DoPost(
+		fmt.Sprintf("/projects/%s/", projectKey),
+		nil,
+		&response,
+	)
+
+	return response, err
+}
+
 func (bc *BitClient) DeleteProject(projectKey string) error {
 
 	_, err := bc.DoDeleteUrl(
