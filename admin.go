@@ -134,7 +134,7 @@ func (bc *BitClient) DeleteUser(params DeleteUserRequest) (DetailedUser, error) 
 
 type UpdateUserRequest struct {
 	Name        string `json:"name"`
-	DisplayName string `jsin:"displayName"`
+	DisplayName string `json:"displayName"`
 	Email       string `json:"email"`
 }
 

@@ -14,6 +14,12 @@ type CreateProjectRequest struct {
 	Key         string `json:"key"`
 }
 
+type UpdateProjectRequest struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Key         string `json:"key"`
+}
+
 type SSHKey struct {
 	Text  string `json:"text"`
 	Label string `json:"label"`
@@ -29,6 +35,18 @@ func (bc *BitClient) CreateProject(params CreateProjectRequest) (Project, error)
 
 	_, err := bc.DoPost(
 		fmt.Sprintf("/projects/"),
+		params,
+		&response,
+	)
+
+	return response, err
+}
+
+func (bc *BitClient) UpdateProject(projectKey string, params UpdateProjectRequest) (Project, error) {
+	response := Project{}
+
+	_, err := bc.DoPut(
+		fmt.Sprintf("/projects//%s/", projectKey),
 		params,
 		&response,
 	)
