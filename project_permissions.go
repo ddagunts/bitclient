@@ -24,6 +24,23 @@ func (bc *BitClient) GetProjectUserPermission(projectKey string, params GetProje
 	return response, err
 }
 
+type SetUserPermissionRequest struct {
+	Users      []string
+	Permission UserPermission
+}
+
+func (bc *BitClient) SetProjectUserPermission(projectKey string, params SetUserPermissionRequest) error {
+	response := GetProjectUserPermissionResponse{}
+
+	_, err := bc.DoPut(
+		fmt.Sprintf("/projects/%s/permissions/users", projectKey),
+		params,
+		&response,
+	)
+
+	return err
+}
+
 type GetProjectGroupPermissionRequest struct {
 	PagedRequest
 	Filter string
