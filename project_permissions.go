@@ -26,7 +26,7 @@ func (bc *BitClient) GetProjectUserPermission(projectKey string, params GetProje
 
 type SetUserPermissionRequest struct {
 	Users      []string
-	Permission UserPermission
+	Permission string `json:"permission,omitempty"`
 }
 
 func (bc *BitClient) SetProjectUserPermission(projectKey string, params SetUserPermissionRequest) error {
