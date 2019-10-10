@@ -25,14 +25,14 @@ func (bc *BitClient) GetProjectUserPermission(projectKey string, params GetProje
 }
 
 type SetUserPermissionRequest struct {
-	Users      []string
-	Permission string `json:"permission,omitempty"`
+	Users      []string `json:"name"`
+	Permission string   `json:"permission"`
 }
 
 func (bc *BitClient) SetProjectUserPermission(projectKey string, params SetUserPermissionRequest) error {
 	response := GetProjectUserPermissionResponse{}
 
-	_, err := bc.DoPut(
+	_, err := bc.DoPutUrl(
 		fmt.Sprintf("/projects/%s/permissions/users", projectKey),
 		params,
 		&response,
