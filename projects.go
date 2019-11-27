@@ -136,3 +136,14 @@ func (bc *BitClient) CreateRepository(projectKey string, params CreateRepository
 
 	return response, err
 }
+
+func (bc *BitClient) DeleteRepository(projectKey, repoSlug string) ( error) {
+
+	_, err := bc.DoDeleteUrl(
+		fmt.Sprintf("/projects/%s/repos/%s", projectKey),
+		nil,
+		nil,
+	)
+
+	return err
+}
