@@ -29,3 +29,17 @@ func (bc *BitClient) SetBranchingModel(projectKey, repositorySlug string, settin
 
 	return err
 }
+
+type SetDefaultBranchRequest struct {
+	ID string `json:"id"`
+}
+
+func (bc *BitClient) SetDefaultBranch(projectKey, repositorySlug string, params SetDefaultBranchRequest) error {
+	_, err := bc.DoPut(
+		fmt.Sprintf("/projects/%s/repos/%s/branches/default", projectKey, repositorySlug),
+		params,
+		nil,
+	)
+
+	return err
+}

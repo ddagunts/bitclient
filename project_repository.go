@@ -20,3 +20,33 @@ func (bc *BitClient) UpdateRepository(projectKey string, repositorySlug string, 
 
 	return response, err
 }
+
+type CreateRepositoryRequest struct {
+	Name     string `json:"name"`
+	ScmId    string `json:"scmId"`
+	Forkable bool   `json:"forkable"`
+}
+
+func (bc *BitClient) CreateRepository(projectKey string, params CreateRepositoryRequest) (Repository, error) {
+
+	response := Repository{}
+
+	_, err := bc.DoPost(
+		fmt.Sprintf("/projects/%s/repos", projectKey),
+		params,
+		&response,
+	)
+
+	return response, err
+}
+
+func (bc *BitClient) DeleteRepository(projectKey, repoSlug string) error {
+
+	_, err := bc.DoDeleteUrl(
+		fmt.Sprintf("/projects/%s/repos/%s", projectKey, repoSlug),
+		nil,
+		nil,
+	)
+
+	return err
+}
